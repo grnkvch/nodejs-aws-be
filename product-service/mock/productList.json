@@ -1,0 +1,66 @@
+[
+  {
+    "count": 4,
+    "description": "Speciality coffee from Brazil, roasted by 2016 World Roasting Champion, Audun Sorbotten. Light roast, perfect for pour over brewing methods. Coffee with dominant sweetness of chocolate and low acidity. ",
+    "id": "7567ec4b-b10c-48c5-9345-fc73c48a80aa",
+    "price": 7.86,
+    "title": "Audun Coffee - Brazil Fazenda Rainha Miaki",
+    "image": "https://www.coffeedesk.com/photos/products/normal/12deb966f8b93fbc349abc9dcc903193.jpg"
+  },
+  {
+    "count": 6,
+    "description": "This one is a flagship blend from our Swedish friends, Johan & Nyström. It is a medium roast coffee that will blow your taste buds when prepared in an espresso machine or a moka pot.",
+    "id": "b823ab27-61f0-4205-9123-87a8480f0b4a",
+    "price": 18.81,
+    "title": "Johan & Nyström - Espresso Fairtrade",
+    "image": "https://www.coffeedesk.com/photos/products/normal/17358ece94fed1b9ca88c22952b2091b.jpg"
+  },
+  {
+    "count": 7,
+    "description": "Meloria is a blend of Arabica beans (75%) and Robusta (25%) created for those who prefer intense flavor. Coffee prepared with these beans will have a lasting crema, full body, vanilla aroma and chocolate notes.",
+    "id": "862beb77-cb73-4f5a-ad2c-b92f0660eec6",
+    "price": 23.58,
+    "title": "Arcaffe Meloria 1kg",
+    "image": "https://www.coffeedesk.com/photos/products/normal/5df32dafe6d3cadea9153e82aebcc2f7.jpg"
+  },
+  {
+    "count": 12,
+    "description": "Speciality coffee from Brazil, roasted by 2015 World Roasting Champion, Audun Sorbotten. Medium roast, perfect for espresso. Coffee with dominant chocolate and nut-like sweetness, and low acidity. ",
+    "id": "063f8dfa-33fa-44cf-87bc-743f529343c6",
+    "price": 14.29,
+    "title": "Audun Coffee - Brazil Fazenda Rainha Miaki Espresso 500g",
+    "image":"https://www.coffeedesk.com/photos/products/normal/33d3e4cb4f9fe0d16582e7121dd92cfd.jpg"
+  },
+  {
+    "count": 7,
+    "description": "This set includes the king of alternative coffee makers - Hario Dripper and coffee beans from Ethiopia roasted by HAYB. Perfect way to prepare black coffee - for the beginners and experienced home-baristas!",
+    "id": "f0bbcf79-4ab1-4147-95b3-cfac23c871fd",
+    "price": 13.10,
+    "title": "Set: Dripper Hario V60-02 + HAYB Coffee",
+    "image":"https://www.coffeedesk.com/photos/products/normal/8047769a3206a7c2eea3701806cb2a7b.jpg"
+  },
+  {
+    "count": 8,
+    "description": "Speciality coffee beans from Costa Rica, roasted by HAYB roastery from Poland. Light roast, perfect for filter coffee machines, drippers, Chemex, AeroPress, French Press, and other pour-over brewing methods. You can expect hints of cherry, raspberry and milk chocolate.",
+    "id": "36cc8a02-033e-4e2a-9cb9-91d08a651632",
+    "price": 15.24,
+    "title": "HAYB - Costa Rica Las Lajas",
+    "image":"https://www.coffeedesk.com/photos/products/normal/dcd5ec5196a37c6790289806d3096fc5.jpg"
+  },
+  {
+    "count": 2,
+    "description": "Speciality coffee from Guatemala, roasted in Poland by Hard Beans roastery. Light roast, perfect for filter coffee machines, drippers, Chemex, AeroPress, French Press, and other pour-over brewing methods. In taste, sweet and fruity. You can expect hints of ripe strawberries, pink wine, and pineapple.",
+    "id": "2ff5bc39-a23b-45a4-980f-85253c2edfb4",
+    "price": 16.20,
+    "title": "Hard Beans - Guatemala CO-CHANGERS",
+    "image":"https://www.coffeedesk.com/photos/products/normal/26a52e896b2287605fff8b9753ec59aa.jpg"
+  },
+  {
+    "count": 3,
+    "description": "Speciality coffee from Honduras, roasted by Nordbeans from the Czech Republic. Light roast, perfect for filter coffee machines, drippers, Chemex, AeroPress, French Press, and other pour-over brewing methods. Sweet and fruity, with the highlighted notes of apples, blackberries and milk chocolate.",
+    "id": "0dfff673-b371-4043-a3a9-35ac82c96281",
+    "price": 10.47,
+    "title": "Nordbeans - Honduras Danny Moreno",
+    "image":"https://www.coffeedesk.com/photos/products/normal/12ae546db98cb9a0bb894fb16753199e.jpg"
+  }
+]
