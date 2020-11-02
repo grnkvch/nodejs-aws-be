@@ -40,7 +40,7 @@
     }
   },
   "paths": {
-    "/getProductsList": {
+    "/products": {
       "get": {
         "description": "",
         "responses": {
@@ -60,12 +60,12 @@
         }
       }
     },
-    "/getProductsById/{id}": {
+    "/products/{productId}": {
       "get": {
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "productId",
             "in": "path",
             "description": "ID of product to return",
             "required": true,
@@ -87,7 +87,7 @@
             }
           },
           "400": {
-            "description": "Path parameter 'id' is required",
+            "description": "Path parameter 'productId' is invalid",
             "content": {}
           },
           "404": {

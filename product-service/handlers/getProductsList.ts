@@ -4,7 +4,6 @@ import asyncDBqueryEmulator from '../mock/asyncDBqueryEmulator';
 
 export const getProductsList: APIGatewayProxyHandler = async () => {
   try{
-    
     const productList = await asyncDBqueryEmulator.find()
 
     return {

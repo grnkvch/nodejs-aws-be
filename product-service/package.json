@@ -9,7 +9,8 @@
     "deploy": "sls deploy"
   },
   "dependencies": {
-    "source-map-support": "^0.5.10"
+    "source-map-support": "^0.5.10",
+    "uuid-v4-validator": "^2.0.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.17",

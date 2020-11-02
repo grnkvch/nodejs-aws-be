@@ -1,13 +1,15 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
+import { UUIDv4 } from 'uuid-v4-validator'
+
 import { corsHeaders } from '../constants/headers';
 import asyncDBqueryEmulator from '../mock/asyncDBqueryEmulator';
 
 export const getProductsById: APIGatewayProxyHandler = async (event) => {
   try {
-    const { id } = event.pathParameters || {};
-  if(!id) throw ({message: 'Path parameter \'id\' is required', statusCode: 400})
+    const { productId } = event.pathParameters || {};
+  if(!UUIDv4.validate(productId)) throw ({message: 'Path parameter \'productId\' is invalid', statusCode: 400})
 
-  const product = await asyncDBqueryEmulator.find(id)
+  const product = await asyncDBqueryEmulator.find(productId)
 
   if(!product) throw ({message: 'Product not found', statusCode: 404})
     return ({
