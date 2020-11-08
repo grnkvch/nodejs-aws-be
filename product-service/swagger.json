@@ -14,6 +14,7 @@
     "schemas": {
       "Product": {
         "type": "object",
+        "required": ["title"],
         "properties": {
           "count": {
             "type": "integer",
@@ -36,11 +37,62 @@
             "type": "string"
           }
         }
+      },
+      "ProductToCreate": {
+        "type": "object",
+        "required": ["title"],
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "example": 2
+          },
+          "description": {
+            "type": "string",
+            "example": "some product ..."
+          },
+          "price": {
+            "type": "number",
+            "example": 2.56
+          },
+          "title": {
+            "type": "string",
+            "example": "Product"
+          },
+          "image": {
+            "type": "string"
+          }
+        }
       }
     }
   },
   "paths": {
-    "/products": {
+    "/product": {
+      "post": {
+        "description":"",
+        "requestBody":{
+            "required": true,
+            "content": {
+              "application/json":{
+                "schema":{
+                  "$ref": "#/components/schemas/ProductToCreate"
+                }
+              }
+            }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          }
+        }
+      },
       "get": {
         "description": "",
         "responses": {
@@ -60,7 +112,7 @@
         }
       }
     },
-    "/products/{productId}": {
+    "/product/{productId}": {
       "get": {
         "description": "",
         "parameters": [
