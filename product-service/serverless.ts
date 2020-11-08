@@ -1,4 +1,5 @@
 import type { Serverless } from 'serverless/aws';
+const config = require('./config');
 
 const serverlessConfiguration: Serverless = {
   service: {
@@ -25,6 +26,11 @@ const serverlessConfiguration: Serverless = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+      PG_HOST: config.PG_HOST,
+      PG_PORT:config.PG_PORT,
+      PG_DATABASE:config.PG_DATABASE,
+      PG_USERNAME:config.PG_USERNAME,
+      PG_PASSWORD:config.PG_PASSWORD,
     },
   },
   functions: {
@@ -46,6 +52,18 @@ const serverlessConfiguration: Serverless = {
           http: {
             method: 'get',
             path: 'product/{productId}'           
+          }
+        },
+      ]
+    },
+    createProduct: {
+      handler: 'handler.createProduct',
+      events: [
+        {
+          http: {
+            method: 'post',
+            cors: true,
+            path: 'product'           
           }
         },
       ]

@@ -2,13 +2,12 @@ import { getProductsById } from "../getProductsById";
 import { APIGatewayProxyResult } from 'aws-lambda';
 import { corsHeaders } from "../../constants/headers";
 import productList from "../../mock/productList.json"
-import asyncDBqueryEmulator from "../../mock/asyncDBqueryEmulator";
+import db from "../../db";
 
-jest.mock('product-service/mock/asyncDBqueryEmulator', ()=> {
-  const { default: module } = jest.requireActual('product-service/mock/asyncDBqueryEmulator')
+jest.mock('product-service/db', ()=> {
+  const module = jest.requireActual('product-service/mock/asyncDBqueryEmulator').default
   return {
-  ...module,
-  find: jest.fn(module.find)
+  getById: jest.fn(module.find)
   }
 })
 
@@ -35,7 +34,7 @@ describe('getProductsById', ()=>{
     expect(body).toBe('Product not found');
   })
   test('Status: 500', async ()=>{
-    asyncDBqueryEmulator.find.mockImplementation(()=>Promise.reject(new Error()))
+    db.getById.mockImplementation(()=>Promise.reject(new Error()))
     const  { headers, statusCode } = await <APIGatewayProxyResult>getProductsById();
     expect(headers).toMatchObject(corsHeaders);
     expect(statusCode).toBe(500);
