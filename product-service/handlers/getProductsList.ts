@@ -1,10 +1,11 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
 import { corsHeaders } from '../constants/headers';
-import asyncDBqueryEmulator from '../mock/asyncDBqueryEmulator';
+import db from '../db';
+import logger from '../logger';
 
-export const getProductsList: APIGatewayProxyHandler = async () => {
+export const getProductsList: APIGatewayProxyHandler = async (event) => {
   try{
-    const productList = await asyncDBqueryEmulator.find()
+    const productList = await db.getAll()
 
     return {
       statusCode: 200,
@@ -18,5 +19,7 @@ export const getProductsList: APIGatewayProxyHandler = async () => {
       headers: corsHeaders,
       body: error.message,
     };
+  } finally {
+    logger.log(event)
   }
 }

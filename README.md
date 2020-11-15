@@ -5,8 +5,8 @@
 or  
 ```git clone git@github.com:grnkvch/nodejs-aws-be.git```  
 
-> 2. Checkout to branch 'task-3'  
-```git checkout task-3```  
+> 2. Checkout to branch 'task4'  
+```git checkout task4```  
 
 > 3. Install dependencies  
 ```yarn install```  
