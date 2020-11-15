@@ -1,4 +1,4 @@
-import type { Serverless } from 'serverless/aws';
+import type { Serverless } from 'serverless/aws'
 
 const serverlessConfiguration: Serverless = {
   service: {
@@ -19,26 +19,55 @@ const serverlessConfiguration: Serverless = {
   provider: {
     name: 'aws',
     runtime: 'nodejs12.x',
+    region: 'eu-west-1',
     apiGateway: {
       minimumCompressionSize: 1024,
     },
+    iamRoleStatements:[
+      { Effect: 'Allow',
+        Action: 's3:ListBucket',
+        Resource:'arn:aws:s3:::imported-csv' },
+      { Effect: 'Allow',
+        Action: 's3:*',
+        Resource:'arn:aws:s3:::imported-csv/*' }
+    ],
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
     },
   },
   functions: {
-    hello: {
-      handler: 'handler.hello',
+    catalogUpload: {
+      handler: 'handler.catalogUpload',
       events: [
         {
           http: {
             method: 'get',
-            path: 'hello',
-          }
+            path: 'import',
+            request:{
+              parameters:{
+                querystrings:{
+                  name: true
+                }
+              }
+            }
+          },
+        }
+      ]
+    },
+    catalogParse: {
+      handler: 'handler.catalogParse',
+      events: [
+        {
+          s3: {
+            bucket: 'imported-csv',
+            event: 's3:ObjectCreated:*',
+            rules:[{ prefix: 'uploaded/', suffix:'.csv' }],
+            existing: true
+          },
         }
       ]
     }
   }
 }
 
-module.exports = serverlessConfiguration;
+module.exports = serverlessConfiguration
