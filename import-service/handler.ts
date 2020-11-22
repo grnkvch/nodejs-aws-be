@@ -2,6 +2,7 @@ import { APIGatewayProxyHandler, S3Handler } from 'aws-lambda'
 import 'source-map-support/register'
 
 import S3 from 'aws-sdk/clients/s3'
+import SQS from 'aws-sdk/clients/sqs'
 import csvParser from 'csv-parser'
 
 
@@ -43,7 +44,7 @@ export const catalogUpload: APIGatewayProxyHandler = async (event) => {
 
 export const catalogParse: S3Handler = (event) => {
   const s3 = new S3({ region: 'eu-west-1' })
-
+  const sqs = new SQS({ region: 'eu-west-1' })
   event.Records.forEach(record => {
     const s3Stream = s3.getObject({
       Bucket: BUCKET,
@@ -52,7 +53,10 @@ export const catalogParse: S3Handler = (event) => {
 
     s3Stream.pipe(csvParser())
       .on('data', (data)=>{
-        console.log(data)
+        sqs.sendMessage({
+          QueueUrl: process.env.SQS_URL,
+          MessageBody: JSON.stringify(data) 
+        }, (err) => console.error('SQS_ERROR', err))
       })
       .on('end', async () =>{
         console.log(`Copy from ${BUCKET}/${record.s3.object.key}`)

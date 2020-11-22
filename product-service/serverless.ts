@@ -1,5 +1,5 @@
-import type { Serverless } from 'serverless/aws';
-const config = require('./config');
+import type { Serverless } from 'serverless/aws'
+const config = require('./config')
 
 const serverlessConfiguration: Serverless = {
   service: {
@@ -24,14 +24,44 @@ const serverlessConfiguration: Serverless = {
     apiGateway: {
       minimumCompressionSize: 1024,
     },
+    iamRoleStatements:[
+      { Effect: 'Allow',
+        Action: 'sqs:*',
+        Resource:{'Fn::GetAtt':['SQSQueue', 'Arn']}
+      }
+    ],
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       PG_HOST: config.PG_HOST,
-      PG_PORT:config.PG_PORT,
-      PG_DATABASE:config.PG_DATABASE,
-      PG_USERNAME:config.PG_USERNAME,
-      PG_PASSWORD:config.PG_PASSWORD,
+      PG_PORT: config.PG_PORT,
+      PG_DATABASE: config.PG_DATABASE,
+      PG_USERNAME: config.PG_USERNAME,
+      PG_PASSWORD: config.PG_PASSWORD,
     },
+  },
+  resources: {
+    Outputs:{
+      SQSArn:{
+        Value:  {'Fn::GetAtt':['SQSQueue', 'Arn']},
+        Export:{
+          Name: 'SQSArn'
+        }
+      },
+      SQSUrl:{
+        Value:  {Ref:'SQSQueue'},
+        Export:{
+          Name: 'SQSUrl'
+        }
+      }
+    },
+    Resources: {
+      SQSQueue: {
+        Type: 'AWS::SQS::Queue',
+        Properties: {
+          QueueName: 'catalogItemsQueue'
+        }
+      }
+    }
   },
   functions: {
     getProductsList: {
@@ -51,7 +81,7 @@ const serverlessConfiguration: Serverless = {
         {
           http: {
             method: 'get',
-            path: 'product/{productId}'           
+            path: 'product/{productId}'
           }
         },
       ]
@@ -63,7 +93,18 @@ const serverlessConfiguration: Serverless = {
           http: {
             method: 'post',
             cors: true,
-            path: 'product'           
+            path: 'product'
+          }
+        },
+      ]
+    },
+    catalogBatchProcess: {
+      handler: 'handler.catalogBatchProcess',
+      events: [
+        {
+          sqs: {
+            batchSize: 5,
+            arn: {'Fn::GetAtt':['SQSQueue', 'Arn']}
           }
         },
       ]
@@ -71,4 +112,4 @@ const serverlessConfiguration: Serverless = {
   }
 }
 
-module.exports = serverlessConfiguration;
+module.exports = serverlessConfiguration
