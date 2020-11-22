@@ -28,6 +28,10 @@ const serverlessConfiguration: Serverless = {
       { Effect: 'Allow',
         Action: 'sqs:*',
         Resource:{'Fn::GetAtt':['SQSQueue', 'Arn']}
+      },
+      { Effect: 'Allow',
+        Action: 'sns:*',
+        Resource:{Ref: 'SNSTopic'}
       }
     ],
     environment: {
@@ -37,6 +41,7 @@ const serverlessConfiguration: Serverless = {
       PG_DATABASE: config.PG_DATABASE,
       PG_USERNAME: config.PG_USERNAME,
       PG_PASSWORD: config.PG_PASSWORD,
+      SNS_ARN: {Ref: 'SNSTopic'}
     },
   },
   resources: {
@@ -59,6 +64,20 @@ const serverlessConfiguration: Serverless = {
         Type: 'AWS::SQS::Queue',
         Properties: {
           QueueName: 'catalogItemsQueue'
+        }
+      },
+      SNSTopic: {
+        Type: 'AWS::SNS::Topic',
+        Properties: {
+          TopicName: 'createProductTopic'
+        }
+      },
+      SNSSubscription: {
+        Type: 'AWS::SNS::Subscription',
+        Properties:{
+          Endpoint: 'waynejohn92@gmail.com',
+          Protocol: 'email',
+          TopicArn: {Ref: 'SNSTopic'}
         }
       }
     }
