@@ -29,10 +29,15 @@ const serverlessConfiguration: Serverless = {
         Resource:'arn:aws:s3:::imported-csv' },
       { Effect: 'Allow',
         Action: 's3:*',
-        Resource:'arn:aws:s3:::imported-csv/*' }
+        Resource:'arn:aws:s3:::imported-csv/*' },
+      { Effect: 'Allow',
+        Action: 'sqs:*',
+        Resource:'${cf.eu-west-1:product-service-dev.SQSArn}'
+      }
     ],
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+      SQS_URL: '${cf.eu-west-1:product-service-dev.SQSUrl}'
     },
   },
   functions: {
